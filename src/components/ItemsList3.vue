@@ -9,7 +9,7 @@
               <span class="grey--text">{{ item.notes }}</span><br>
             </div>
           </v-flex>
-          <v-flex d-flex md3>
+          <v-flex d-flex md2>
             <div>
               <span>{{ item.type}}</span><br>
               <span class="green--text">{{ item.when }}</span><br>
@@ -18,24 +18,40 @@
         </v-layout>
       </div>
       <v-card>
-        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
+        <v-card>
+        <v-card-title>
+          <div>
+            <span>Details</span><br>
+            <span>{{ item.notes }}</span><br>
+            <span>Due date</span><br>
+            <span>{{ item.dueDate }}</span><br>
+          </div>
+        </v-card-title>
+        </v-card>
       </v-card>
     </v-expansion-panel-content>
   </v-expansion-panel>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
+    computed: {
+      ...mapGetters('dataModule', ['items'])
+    },
     data: function () {
       return {
-        items: [
-          { title: 'Lightning Talk: Let\'s do it offline', notes: 'I need to be ready by this time, as I am giving a presentation!', type: 'Event', when: 'In 1 week 2 days 3 hours', expanded: false },
-          { title: 'Party at John Doe\'s', notes: 'A lot of everything!', type: 'Event', when: 'In 1 week 3 days', expanded: false },
-          { title: 'Buy lamp', notes: 'I need it for an upcoming event', type: 'Task', when: 'Due in 1 week 2 days 3 hours', expanded: false },
-          { title: 'Lightning Talk: Let\'s do it offline', notes: 'I need to be ready by this time, as I am giving a presentation!', type: 'Event', when: 'In 1 week 2 days 3 hours', expanded: false },
-          { title: 'Lightning Talk: Let\'s do it offline', notes: 'I need to be ready by this time, as I am giving a presentation!', type: 'Event', when: 'In 1 week 2 days 3 hours', expanded: false }
-        ]
+
       }
+    },
+    methods: {
+      loadData () {
+        this.$store.dispatch('dataModule/loadItems')
+      }
+    },
+    mounted () {
+      this.loadData()
     }
   }
 </script>
