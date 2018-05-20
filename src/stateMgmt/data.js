@@ -16,7 +16,6 @@ const getters = {
 const actions = {
   loadItems (context) {
     dataService.getItems().then(items => {
-      console.log(items)
       context.commit(SET_ITEMS, items)
     })
   },

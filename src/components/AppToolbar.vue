@@ -8,7 +8,7 @@
   >
     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
       <v-toolbar-side-icon @click.stop="$emit('input', !drawer)"></v-toolbar-side-icon>
-      <span class="hidden-sm-and-down">Life Tracker</span>
+      <span>Life Tracker</span>
     </v-toolbar-title>
     <v-text-field
       flat
