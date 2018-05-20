@@ -18,13 +18,14 @@
               <v-text-field
                 prepend-icon="notes"
                 placeholder="Details"
+                rows=2
                 multi-line
               ></v-text-field>
             </v-flex>
             <v-flex xs6>
               <v-dialog
-                  ref="dialog"
-                  v-model="modal"
+                  ref="dateDialog"
+                  v-model="datePickerModal"
                   :return-value.sync="date"
                   persistent
                   lazy
@@ -34,16 +35,40 @@
                   <v-text-field
                     slot="activator"
                     v-model="date"
-                    placeholder="Due date"
+                    placeholder="Date"
                     prepend-icon="event"
                     readonly
                   ></v-text-field>
                   <v-date-picker v-model="date" scrollable>
                     <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
-                    <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                    <v-btn flat color="primary" @click="datePickerModal = false">Cancel</v-btn>
+                    <v-btn flat color="primary" @click="$refs.dateDialog.save(date)">OK</v-btn>
                   </v-date-picker>
                 </v-dialog>
+            </v-flex>
+            <v-flex xs6>
+              <v-dialog
+                ref="timeDialog"
+                v-model="timePickerModal"
+                :return-value.sync="time"
+                persistent
+                lazy
+                full-width
+                width="290px"
+              >
+                <v-text-field
+                  slot="activator"
+                  v-model="time"
+                  placeholder="Time"
+                  prepend-icon="access_time"
+                  readonly
+                ></v-text-field>
+                <v-time-picker v-model="time" actions>
+                  <v-spacer></v-spacer>
+                  <v-btn flat color="primary" @click="timePickerModal = false">Cancel</v-btn>
+                  <v-btn flat color="primary" @click="$refs.timeDialog.save(time)">OK</v-btn>
+                </v-time-picker>
+              </v-dialog>
             </v-flex>
           </v-layout>
         </v-container>
@@ -64,7 +89,9 @@ export default {
   data: () => {
     return {
       date: null,
-      modal: false
+      time: null,
+      datePickerModal: false,
+      timePickerModal: false
     }
   }
 }
