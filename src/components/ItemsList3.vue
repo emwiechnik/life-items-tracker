@@ -27,6 +27,10 @@
             <span>{{ item.date }}, {{ item.time }}</span><br>
           </div>
         </v-card-title>
+        <v-card-actions>
+          <v-btn flat><v-icon>edit</v-icon>Edit</v-btn>
+          <v-btn flat><v-icon>delete</v-icon>Delete</v-btn>
+        </v-card-actions>
         </v-card>
       </v-card>
     </v-expansion-panel-content>
