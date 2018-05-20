@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="show" width="800px">
+  <v-dialog v-model="value" width="800px">
       <v-card>
         <v-card-title class="grey lighten-4 py-4 title">
           Create event or task
@@ -83,7 +83,7 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="show = false">Cancel</v-btn>
+          <v-btn flat color="primary" @click="$emit('input', false)">Cancel</v-btn>
           <v-btn flat @click="addItem">Add</v-btn>
         </v-card-actions>
       </v-card>
@@ -93,7 +93,7 @@
 <script>
   export default {
     props: [
-      'show'
+      'value'
     ],
     data: () => {
       return {

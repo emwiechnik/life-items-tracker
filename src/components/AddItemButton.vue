@@ -11,7 +11,7 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-    <add-item-dialog :show="dialog"></add-item-dialog>
+    <add-item-dialog v-model="dialog"></add-item-dialog>
   </div>
 </template>
 
