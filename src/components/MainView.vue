@@ -5,8 +5,8 @@
     </v-navigation-drawer>
     <app-toolbar v-model="drawer"></app-toolbar>
 
-    <v-content>
-      <v-container fluid fill-height>
+    <v-content style="padding-left: 0px; padding-top: 0px;">
+      <v-container fluid>
         <v-layout justify-center align-center>
           <items-list></items-list>
         </v-layout>
