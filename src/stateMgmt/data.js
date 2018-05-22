@@ -23,6 +23,11 @@ const actions = {
     dataService.addItem(newItem).then(() => {
       context.dispatch('loadItems')
     })
+  },
+  updateItem (context, updatedItem) {
+    dataService.updateItem(updatedItem).then(() => {
+      context.dispatch('loadItems')
+    })
   }
 }
 

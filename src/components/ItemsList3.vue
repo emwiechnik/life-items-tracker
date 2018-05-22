@@ -28,20 +28,25 @@
           </div>
         </v-card-title>
         <v-card-actions>
-          <v-btn flat><v-icon>edit</v-icon>Edit</v-btn>
+          <v-btn flat v-on:click="editItem(item)"><v-icon>edit</v-icon>Edit</v-btn>
           <v-btn flat><v-icon>delete</v-icon>Delete</v-btn>
         </v-card-actions>
         </v-card>
       </v-card>
     </v-expansion-panel-content>
+    <update-item-dialog v-model="dialog" :item="currentItem" v-on:submitted="updateItem" update></update-item-dialog>
   </v-expansion-panel>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
   import moment from 'moment'
+  import UpdateItemDialog from './AddOrUpdateItemDialog.vue'
 
   export default {
+    components: {
+      UpdateItemDialog
+    },
     computed: {
       ...mapGetters('dataModule', ['items'])
     },
@@ -52,7 +57,14 @@
     },
     data: function () {
       return {
-        formattedItems: []
+        formattedItems: [],
+        dialog: false,
+        currentItem: {
+          type: '',
+          details: null,
+          date: null,
+          time: null
+        }
       }
     },
     methods: {
@@ -62,21 +74,20 @@
         })
       },
       formatItems () {
-        let that = this
-        that.formattedItems = []
+        this.formattedItems = this.items
         this.items.forEach(item => {
-          that.formattedItems.push({
-            title: item.title,
-            details: item.details,
-            type: item.type,
-            when: this.getWhenField(item.date, item.time),
-            date: item.date,
-            time: item.time
-          })
+          item.when = this.getWhenField(item.date, item.time)
         })
       },
       getWhenField (date, time) {
         return moment(date).fromNow()
+      },
+      editItem (item) {
+        this.currentItem = item
+        this.dialog = true
+      },
+      updateItem (item) {
+        this.$store.dispatch('dataModule/updateItem', item)
       }
     },
     mounted () {

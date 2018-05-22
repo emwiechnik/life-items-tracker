@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="value" width="800px">
+  <v-dialog v-if="currentItem" v-model="value" width="800px">
       <v-card>
         <v-card-title class="grey lighten-4 py-4 title">
           Create event or task
@@ -83,8 +83,8 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="$emit('input', false)">Cancel</v-btn>
-          <v-btn flat @click="addItem">Add</v-btn>
+          <v-btn flat color="primary" @click="hide">Cancel</v-btn>
+          <v-btn flat @click="submit">{{ buttonTitle }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -92,27 +92,44 @@
 
 <script>
   export default {
-    props: [
-      'value'
-    ],
+    props: {
+      value: Boolean,
+      item: Object,
+      add: Boolean,
+      update: Boolean
+    },
+    computed: {
+      currentItem: function () {
+        let dc = JSON.parse(JSON.stringify(this.item))
+        console.log(dc)
+        let sc = { ...this.item }
+        console.log(sc)
+        console.log(this.item)
+        // return this.item
+        return dc // todo: find out why only passing the this.item allows to edit the date properly; the other two options break the bahviour of the date update
+      },
+      buttonTitle: function () {
+        if (this.add) {
+          return 'Add'
+        } else {
+          return 'Update'
+        }
+      }
+    },
     data: () => {
       return {
-        currentItem: {
-          type: '',
-          details: null,
-          date: null,
-          time: null
-        },
         datePickerModal: false,
-        timePickerModal: false
+        timePickerModal: false,
+        show: this.value
       }
     },
     methods: {
-      addItem (newItem) {
-        let that = this
-        this.$store.dispatch('dataModule/addItem', this.currentItem).then(() => {
-          that.show = false
-        })
+      submit () {
+        this.$emit('submitted', this.currentItem)
+        this.hide()
+      },
+      hide () {
+        this.$emit('input', false)
       }
     }
   }

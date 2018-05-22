@@ -30,7 +30,17 @@ const dataService = {
     return new Promise((resolve) => {
       db.put(item, function callback (err, result) {
         if (!err) {
-          console.log('Successfully posted the item!')
+          console.log('Successfully added the item!')
+        }
+      })
+      resolve()
+    })
+  },
+  updateItem (item) {
+    return new Promise((resolve) => {
+      db.put(item, function callback (err, result) {
+        if (!err) {
+          console.log('Successfully updated the item!')
         }
       })
       resolve()
