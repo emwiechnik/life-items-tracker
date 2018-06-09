@@ -20,7 +20,9 @@ class UnauthenticatedUser {
 }
 
 function generateUserNameFromEmail (email) {
-  return email
+  let preprocessed = email.replace(/[@]/g, '_')
+  let userName = preprocessed.replace(/[^a-zA-Z0-9_.-]/g, '')
+  return userName
 }
 
 const cloudService = {
@@ -42,7 +44,7 @@ const cloudService = {
   },
   signInWithEmailAndPassword (email, password) {
     return new Promise((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(email, password).then(() => { // todo: see if you can ignore argument
+      firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
         resolve()
       }, err => {
         reject(err)
