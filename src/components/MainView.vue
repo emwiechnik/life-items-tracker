@@ -29,19 +29,29 @@
       AppToolbar,
       AddItemButton
     },
-    data: () => ({
-      drawer: null,
-      items: [
-        { icon: 'settings', text: 'Upcoming' },
-        { icon: 'settings', text: 'Past' },
-        { divider: true },
-        { icon: 'help', text: 'Help' },
-        { icon: 'settings', text: 'Settings' },
-        { icon: 'chat_bubble', text: 'Send feedback' }
-      ]
-    }),
+    data: function () {
+      return {
+        drawer: null,
+        items: [
+          { icon: 'settings', text: 'Upcoming' },
+          { icon: 'settings', text: 'Past' },
+          { divider: true },
+          { icon: 'help', text: 'Help' },
+          { icon: 'settings', text: 'Settings' },
+          { icon: 'chat_bubble', text: 'Send feedback' },
+          { icon: 'exit_to_app', text: 'Log out', onClick: this.logout }
+        ]
+      }
+    },
     props: {
       source: String
+    },
+    methods: {
+      logout () {
+        this.$store.dispatch('userModule/logout').then(() => {
+          this.$router.push('/login')
+        })
+      }
     }
   }
 </script>

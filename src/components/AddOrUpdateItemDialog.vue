@@ -101,10 +101,9 @@
     computed: {
       currentItem: function () {
         let dc = JSON.parse(JSON.stringify(this.item))
-        console.log(dc)
-        let sc = { ...this.item }
-        console.log(sc)
-        console.log(this.item)
+        // let sc = { ...this.item }
+        // console.log(sc)
+        // console.log(this.item)
         // return this.item
         return dc // todo: find out why only passing the this.item allows to edit the date properly; the other two options break the bahviour of the date update
       },

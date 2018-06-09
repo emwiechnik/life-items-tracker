@@ -3,14 +3,19 @@ import Router from 'vue-router'
 import MainView from '@/components/MainView'
 import Login from '@/components/Login'
 
+import cloudService from '../services/cloud.service'
+
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Life Tracker',
-      component: MainView
+      name: 'Main',
+      component: MainView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/login',
@@ -19,3 +24,14 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  let user = cloudService.currentUser()
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+
+  if (requiresAuth && user.isAuthenticated === false) next('/login')
+  else if (!requiresAuth && user.isAuthenticated) next('/')
+  else next()
+})
+
+export default router

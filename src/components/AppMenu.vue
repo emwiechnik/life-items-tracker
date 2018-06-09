@@ -35,7 +35,7 @@
           <v-list-tile
             v-for="(child, i) in item.children"
             :key="i"
-            @click=""
+            @click="invoke(child.onClick)"
           >
             <v-list-tile-action v-if="child.icon">
               <v-icon>{{ child.icon }}</v-icon>
@@ -47,7 +47,7 @@
             </v-list-tile-content>
           </v-list-tile>
         </v-list-group>
-        <v-list-tile v-else :key="item.text" @click="">
+        <v-list-tile v-else :key="item.text" @click="invoke(item.onClick)">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -66,7 +66,14 @@
   export default {
     props: [
       'items'
-    ]
+    ],
+    methods: {
+      invoke (f) {
+        if (f) {
+          f()
+        }
+      }
+    }
   }
 </script>
 
