@@ -15,7 +15,7 @@ const getters = {
 
 const actions = {
   refresh (context) {
-    let user = cloudService.currentUser()
+    let user = cloudService.getCurrentUser()
     if (user) {
       context.commit(REFRESH_USER_DETAILS, user)
     }

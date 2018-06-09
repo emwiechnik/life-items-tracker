@@ -2,6 +2,17 @@ import firebase from 'firebase'
 
 // todo: consider moving the whole service into TypeScript, so that you can make use of strong typing and nicely implemented polymorphism
 
+// Firebase configuration
+let config = {
+  apiKey: 'AIzaSyB9zjooxD0njIrxFeM2Arn30tJ5BDNt8o4',
+  authDomain: 'myfirstfirebaseproject-d7d27.firebaseapp.com',
+  databaseURL: 'https://myfirstfirebaseproject-d7d27.firebaseio.com',
+  projectId: 'myfirstfirebaseproject-d7d27',
+  storageBucket: 'myfirstfirebaseproject-d7d27.appspot.com',
+  messagingSenderId: '400499969549'
+}
+
+// Models
 class AuthenticatedUser {
   constructor (uid, name, fullName, email, avatarUrl) {
     this.uid = uid
@@ -19,23 +30,16 @@ class UnauthenticatedUser {
   }
 }
 
+// Utility methods
 function generateUserNameFromEmail (email) {
   let preprocessed = email.replace(/[@]/g, '_')
   let userName = preprocessed.replace(/[^a-zA-Z0-9_.-]/g, '')
   return userName
 }
 
+// The actual service that handles Firebase calls
 const cloudService = {
   init () {
-    let config = {
-      apiKey: 'AIzaSyB9zjooxD0njIrxFeM2Arn30tJ5BDNt8o4',
-      authDomain: 'myfirstfirebaseproject-d7d27.firebaseapp.com',
-      databaseURL: 'https://myfirstfirebaseproject-d7d27.firebaseio.com',
-      projectId: 'myfirstfirebaseproject-d7d27',
-      storageBucket: 'myfirstfirebaseproject-d7d27.appspot.com',
-      messagingSenderId: '400499969549'
-    }
-
     firebase.initializeApp(config)
 
     return new Promise((resolve, reject) => {
@@ -70,7 +74,7 @@ const cloudService = {
       })
     })
   },
-  currentUser () {
+  getCurrentUser () {
     let user = firebase.auth().currentUser
 
     if (user) {

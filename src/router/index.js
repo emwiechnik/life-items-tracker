@@ -26,7 +26,7 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  let user = cloudService.currentUser()
+  let user = cloudService.getCurrentUser()
   let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   if (requiresAuth && user.isAuthenticated === false) next('/login')
