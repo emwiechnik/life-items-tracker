@@ -4,13 +4,15 @@ import cloudService from '../services/cloud.service'
 const state = {
   user: {
     name: '',
-    email: ''
+    email: '',
+    authenticated: false
   }
 }
 
 const getters = {
   userName: state => state.user.name,
-  userEmail: state => state.user.email
+  userEmail: state => state.user.email,
+  userAuthenticated: state => state.user.authenticated
 }
 
 const actions = {
@@ -49,6 +51,7 @@ const mutations = {
   [REFRESH_USER_DETAILS] (state, user) {
     state.user.name = user.name
     state.user.email = user.email
+    state.user.authenticated = user.isAuthenticated
   }
 }
 

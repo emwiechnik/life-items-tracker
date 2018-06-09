@@ -7,10 +7,11 @@
     fixed
   >
     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-      <v-toolbar-side-icon @click.stop="$emit('input', !drawer)"></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-if="userAuthenticated" v-on:click.stop="$emit('input', !drawer)"></v-toolbar-side-icon>
       <span>Life Tracker</span>
     </v-toolbar-title>
     <v-text-field
+      v-if="userAuthenticated"
       flat
       solo-inverted
       prepend-icon="search"
@@ -35,7 +36,7 @@
       drawer: function () {
         return this.value
       },
-      ...mapGetters('userModule', ['userEmail'])
+      ...mapGetters('userModule', ['userAuthenticated', 'userEmail'])
     },
     mounted () {
       this.$store.dispatch('userModule/refresh')
