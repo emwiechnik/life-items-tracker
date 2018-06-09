@@ -17,10 +17,16 @@
       label="Search"
       class="hidden-sm-and-down"
     ></v-text-field>
+    <v-spacer></v-spacer>
+    <v-toolbar-items>
+      <v-card flat color="blue darken-3" v-if="userName"><v-card-title>{{ userName }}</v-card-title></v-card>
+    </v-toolbar-items>
   </v-toolbar>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     props: [
       'value'
@@ -28,7 +34,8 @@
     computed: {
       drawer: function () {
         return this.value
-      }
+      },
+      ...mapGetters('userModule', ['userName'])
     }
   }
 </script>
