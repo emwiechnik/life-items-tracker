@@ -27,9 +27,9 @@ const cloudService = {
       firebase.auth().onAuthStateChanged(resolve, reject)
     })
   },
-  signInWithEmailAndPassword () {
+  signInWithEmailAndPassword (email, password) {
     return new Promise((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => { // todo: see if you can ignore argument
+      firebase.auth().signInWithEmailAndPassword(email, password).then(() => { // todo: see if you can ignore argument
         resolve()
       }, err => {
         reject(err)
@@ -40,6 +40,15 @@ const cloudService = {
     return new Promise((resolve, reject) => {
       let provider = new firebase.auth.GoogleAuthProvider()
       firebase.auth().signInWithRedirect(provider).then(user => {
+        resolve()
+      }, err => {
+        reject(err)
+      })
+    })
+  },
+  signOut () {
+    return new Promise((resolve, reject) => {
+      firebase.auth().signOut().then(() => {
         resolve()
       }, err => {
         reject(err)
