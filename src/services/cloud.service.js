@@ -1,4 +1,6 @@
-import firebase from 'firebase'
+// import firebase from 'firebase'
+import * as firebase from 'firebase/app'
+import 'firebase/auth'
 
 // todo: consider moving the whole service into TypeScript, so that you can make use of strong typing and nicely implemented polymorphism
 

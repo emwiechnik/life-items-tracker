@@ -2,13 +2,6 @@ import db from './pouchdb.instance.js'
 
 const dataService = {
   getItems () {
-    // let items = [
-    //   { type: 'Event', title: 'Lightning Talk: Let\'s do it offline', details: 'I need to be ready by this time, as I am giving a presentation!', date: '2018-06-06', time: '15:00' },
-    //   { type: 'Event', title: 'Lightning Talk: Let\'s do it offline', details: 'I need to be ready by this time, as I am giving a presentation!', date: '2018-06-06', time: '15:00' },
-    //   { type: 'Event', title: 'Lightning Talk: Let\'s do it offline', details: 'I need to be ready by this time, as I am giving a presentation!', date: '2018-06-06', time: '15:00' },
-    //   { type: 'Event', title: 'Lightning Talk: Let\'s do it offline', details: 'I need to be ready by this time, as I am giving a presentation!', date: '2018-06-06', time: '15:00' },
-    //   { type: 'Event', title: 'Lightning Talk: Let\'s do it offline', details: 'I need to be ready by this time, as I am giving a presentation!', date: '2018-06-06', time: '15:00' }
-    // ]
     return new Promise((resolve) => {
       let items = []
 
