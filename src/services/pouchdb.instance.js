@@ -1,5 +1,6 @@
 import PouchDB from 'pouchdb'
 import axios from 'axios'
+import securityService from './security.service'
 
 // eslint-disable-next-line
 axios.defaults.baseURL = 'http://localhost:3123' // SERVER_API_URL
@@ -33,7 +34,7 @@ class DbContext {
       axios.post('/access', null, {
         headers: {
           'Content-Type': 'application/json',
-          'UserName': userId
+          'Data': securityService.secureString(userId)
         }
       }).then(response => {
         resolve()
