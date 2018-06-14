@@ -5,6 +5,7 @@ const state = {
   user: {
     name: '',
     email: '',
+    id: '',
     authenticated: false
   }
 }
@@ -12,6 +13,7 @@ const state = {
 const getters = {
   userName: state => state.user.name,
   userEmail: state => state.user.email,
+  userId: state => state.user.id,
   userAuthenticated: state => state.user.authenticated
 }
 
@@ -28,6 +30,8 @@ const actions = {
         context.dispatch('refresh').then(() => {
           resolve()
         })
+      }, err => {
+        reject(err)
       })
     })
   },
@@ -50,6 +54,7 @@ const actions = {
 const mutations = {
   [REFRESH_USER_DETAILS] (state, user) {
     state.user.name = user.name
+    state.user.id = user.uid
     state.user.email = user.email
     state.user.authenticated = user.isAuthenticated
   }

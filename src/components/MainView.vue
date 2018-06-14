@@ -36,6 +36,8 @@
           { icon: 'settings', text: 'Upcoming' },
           { icon: 'settings', text: 'Past' },
           { divider: true },
+          { icon: 'sync', text: 'Sync', onClick: this.sync },
+          { divider: true },
           { icon: 'help', text: 'Help' },
           { icon: 'settings', text: 'Settings' },
           { icon: 'chat_bubble', text: 'Send feedback' },
@@ -43,10 +45,12 @@
         ]
       }
     },
-    props: {
-      source: String
-    },
     methods: {
+      sync () {
+        this.$store.dispatch('dataModule/sync').then(() => {
+          this.$store.dispatch('dataModule/loadItems')
+        })
+      },
       logout () {
         this.$store.dispatch('userModule/logout').then(() => {
           this.$router.push('/login')

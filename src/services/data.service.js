@@ -1,11 +1,24 @@
-import db from './pouchdb.instance.js'
+import dbContext from './pouchdb.instance.js'
 
 const dataService = {
+  init (userId) {
+    return new Promise((resolve, reject) => {
+      dbContext.connect(userId).then(resolve, reject)
+    })
+  },
+  isInitialized () {
+    return !!dbContext.db
+  },
+  sync () {
+    return new Promise((resolve, reject) => {
+      dbContext.sync().then(resolve, reject)
+    })
+  },
   getItems () {
     return new Promise((resolve) => {
       let items = []
 
-      db.allDocs({include_docs: true, descending: true}, function (err, doc) {
+      dbContext.db.allDocs({include_docs: true, descending: true}, function (err, doc) {
         items = doc.rows
 
         if (err) {
@@ -21,7 +34,7 @@ const dataService = {
     item._id = new Date().toISOString()
 
     return new Promise((resolve) => {
-      db.put(item, function callback (err, result) {
+      dbContext.db.put(item, function callback (err, result) {
         if (!err) {
           console.log('Successfully added the item!')
         }
@@ -31,7 +44,7 @@ const dataService = {
   },
   updateItem (item) {
     return new Promise((resolve) => {
-      db.put(item, function callback (err, result) {
+      dbContext.db.put(item, function callback (err, result) {
         if (!err) {
           console.log('Successfully updated the item!')
         }

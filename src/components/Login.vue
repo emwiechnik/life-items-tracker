@@ -74,6 +74,8 @@
       loginWithEmailAndPassword () {
         this.$store.dispatch('userModule/loginWithEmailAndPassword', { email: this.email, password: this.password }).then(() => {
           this.$router.replace('/')
+        }, err => {
+          alert(err)
         })
       },
       loginWithGoogle () {

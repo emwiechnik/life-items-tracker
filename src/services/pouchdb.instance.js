@@ -1,14 +1,11 @@
 import PouchDB from 'pouchdb'
+import axios from 'axios'
+
+// eslint-disable-next-line
+axios.defaults.baseURL = 'http://localhost:3123' // SERVER_API_URL
 
 const COUCHDB_URL = 'http://127.0.0.1:5984'
 const dbName = 'itemsDb'
-const userName = 'user1'
-const pwd = 'user1pass' // temporarily hardcoded
-
-const db = new PouchDB(dbName)
-console.log('Created local db connection')
-
-const creds = { name: userName, password: pwd }
 
 function toHex (s) {
   let u = unescape(encodeURIComponent(s))
@@ -19,35 +16,78 @@ function toHex (s) {
   return h
 }
 
-const hexEncodedUserName = toHex(userName)
-
-// connect to the remote db
-fetch(`${COUCHDB_URL}/_session`, {
-  method: 'POST',
-  body: JSON.stringify(creds),
-  headers: {
-    'Content-Type': 'application/json'
+class DbContext {
+  constructor (remoteUrl, dbName) {
+    this.remoteUrl = remoteUrl
+    this.dbName = dbName
+    this.db = null
+    this.remoteDb = null
   }
-}).then(res => res.json())
-  .catch(error => console.error('Error:', error))
-  .then(response => console.log('Success:', response))
 
-const remoteDatabase = new PouchDB(`${COUCHDB_URL}/userdb-${hexEncodedUserName}`, {
-  skipSetup: true,
-  ajax: {
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8'
-    }
+  initSession (userId) {
+    // get the authentication details from the proxy authorization endpoint
+    // 1. send the userId
+    // 2. receive userName, roles and authToken
+    console.log('Initializing session for user ' + userId)
+    return new Promise((resolve, reject) => {
+      axios.post('/access', null, {
+        headers: {
+          'Content-Type': 'application/json',
+          'UserName': userId
+        }
+      }).then(response => {
+        resolve()
+      }, err => {
+        reject(err)
+      })
+    })
   }
-})
-console.log('Created remote db connection')
 
-console.log('Requested synching')
-PouchDB.sync(db, remoteDatabase, {
-  live: false,
-  heartbeat: false,
-  timeout: false,
-  retry: true
-})
+  connect (userId) {
+    return new Promise((resolve, reject) => {
+      let hexEncodedUserName = toHex(userId)
+      let localDbName = `${this.dbName}${hexEncodedUserName}`
+      this.db = new PouchDB(localDbName)
+      console.log('Created local db connection')
 
-export default db
+      this.initSession(userId).then(() => {
+        this.remoteDb = new PouchDB(`${this.remoteUrl}/userdb-${hexEncodedUserName}`, {
+          skipSetup: false, // todo: find out whether you really need this
+          ajax: {
+            withCredentials: false,
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8',
+              'X-Auth-CouchDB-Roles': '',
+              'X-Auth-CouchDB-UserName': userId
+            }
+          }
+        })
+        console.log('Created remote db connection')
+        resolve()
+      }, err => {
+        console.log('Could not initialize session, error: ' + err.message)
+        reject(err)
+      })
+    })
+  }
+
+  sync () {
+    return new Promise((resolve, reject) => {
+      console.log('Requested synching')
+      PouchDB.sync(this.db, this.remoteDb, {
+        live: false,
+        heartbeat: false,
+        timeout: false,
+        retry: true
+      }).then(() => {
+        console.log('Sync finished')
+        resolve()
+      }, err => {
+        console.log('Sync failed ' + err.message)
+        reject(err)
+      })
+    })
+  }
+}
+
+export default new DbContext(COUCHDB_URL, dbName)

@@ -1,5 +1,7 @@
 <template>
   <v-expansion-panel>
+    <div v-if="!authorized">Unauthorized</div>
+    <div v-if="!connected">Could not initialize fetching data from remote source</div>
     <v-expansion-panel-content v-for="(item, index) in formattedItems" :key="index" hide-actions>
       <div slot="header">
         <v-layout d-flex row>
@@ -48,7 +50,7 @@
       UpdateItemDialog
     },
     computed: {
-      ...mapGetters('dataModule', ['items'])
+      ...mapGetters('dataModule', ['items', 'authorized', 'connected'])
     },
     watch: {
       items: function () {
