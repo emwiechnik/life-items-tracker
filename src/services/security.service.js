@@ -24,8 +24,9 @@ function getPaddedLast (v, number) {
 
 const securityService = {
   extractSecuredString (str) {
-    let original = str.slice(0, -SIGNATURE_LENGTH)
-    let originalSignature = str.slice(-SIGNATURE_LENGTH)
+    let decoded = atob(str)
+    let original = decoded.slice(0, -SIGNATURE_LENGTH)
+    let originalSignature = decoded.slice(-SIGNATURE_LENGTH)
 
     let hashed = hash(original)
     let hashedSignature = getPaddedLast(hashed, SIGNATURE_LENGTH)
@@ -38,7 +39,8 @@ const securityService = {
   secureString (str) {
     let hashed = hash(str)
     let result = `${str}${getPaddedLast(hashed, SIGNATURE_LENGTH)}`
-    return result
+    let encoded = btoa(result)
+    return encoded
   }
 }
 
