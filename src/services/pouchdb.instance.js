@@ -37,7 +37,7 @@ class DbContext {
           'Data': securityService.secureString(userId)
         }
       }).then(response => {
-        resolve()
+        resolve(response.data)
       }, err => {
         reject(err)
       })
@@ -51,7 +51,9 @@ class DbContext {
       this.db = new PouchDB(localDbName)
       console.log('Created local db connection')
 
-      this.initSession(userId).then(() => {
+      this.initSession(userId).then(data => {
+        this.remoteUrl = data.url
+        document.cookie = data.cookie
         this.remoteDb = new PouchDB(`${this.remoteUrl}/userdb-${hexEncodedUserName}`, {
           skipSetup: false, // todo: find out whether you really need this
           ajax: {
@@ -59,7 +61,8 @@ class DbContext {
             headers: {
               'Content-Type': 'application/json; charset=utf-8',
               'X-Auth-CouchDB-Roles': '',
-              'X-Auth-CouchDB-UserName': userId
+              'X-Auth-CouchDB-UserName': userId,
+              'cookie': data.cookie
             }
           }
         })

@@ -62,7 +62,8 @@ const actions = {
   },
   updateItem (context, updatedItem) {
     dataService.updateItem(updatedItem).then(() => {
-      context.dispatch('loadItems')
+      // context.dispatch('loadItems')
+      context.dispatch('sync')
     })
   }
 }
