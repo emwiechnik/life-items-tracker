@@ -50,6 +50,7 @@
         this.$store.dispatch('dataModule/sync').then(() => {
           this.$store.dispatch('dataModule/loadItems')
         })
+        this.drawer = false
       },
       logout () {
         this.$store.dispatch('userModule/logout').then(() => {
