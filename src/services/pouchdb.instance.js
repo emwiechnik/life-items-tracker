@@ -2,10 +2,7 @@ import PouchDB from 'pouchdb'
 import axios from 'axios'
 import securityService from './security.service'
 
-// eslint-disable-next-line
-axios.defaults.baseURL = 'http://localhost:3123' // SERVER_API_URL
-
-const COUCHDB_URL = 'http://127.0.0.1:5984'
+axios.defaults.baseURL = process.env.SERVER_API_URL
 const dbName = 'itemsDb'
 
 function toHex (s) {
@@ -28,7 +25,7 @@ class DbContext {
   initSession (userId) {
     // get the authentication details from the proxy authorization endpoint
     // 1. send the userId
-    // 2. receive userName, roles and authToken
+    // 2. receive the cookie  to be sent in the subsequent requests to CouchDB
     console.log('Initializing session for user ' + userId)
     return new Promise((resolve, reject) => {
       axios.post('/access', null, {
@@ -52,12 +49,11 @@ class DbContext {
       console.log('Created local db connection')
 
       this.initSession(userId).then(data => {
-        this.remoteUrl = data.url
         document.cookie = data.cookie
         this.remoteDb = new PouchDB(`${this.remoteUrl}/userdb-${hexEncodedUserName}`, {
-          skipSetup: false, // todo: find out whether you really need this
+          skipSetup: true, // todo: find out whether you really need this
           ajax: {
-            withCredentials: false,
+            withCredentials: true,
             headers: {
               'Content-Type': 'application/json; charset=utf-8',
               'X-Auth-CouchDB-Roles': '',
@@ -94,4 +90,4 @@ class DbContext {
   }
 }
 
-export default new DbContext(COUCHDB_URL, dbName)
+export default new DbContext(process.env.COUCHDB_URL, dbName)
