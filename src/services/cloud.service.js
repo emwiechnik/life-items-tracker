@@ -6,12 +6,12 @@ import 'firebase/auth'
 
 // Firebase configuration
 let config = {
-  apiKey: 'AIzaSyB9zjooxD0njIrxFeM2Arn30tJ5BDNt8o4',
-  authDomain: 'myfirstfirebaseproject-d7d27.firebaseapp.com',
-  databaseURL: 'https://myfirstfirebaseproject-d7d27.firebaseio.com',
-  projectId: 'myfirstfirebaseproject-d7d27',
-  storageBucket: 'myfirstfirebaseproject-d7d27.appspot.com',
-  messagingSenderId: '400499969549'
+  apiKey: 'AIzaSyAOeAIOaaTSColKhX5GN2cW9Xke1ceSeAo',
+  authDomain: 'lifetracker-d91c8.firebaseapp.com',
+  databaseURL: 'https://lifetracker-d91c8.firebaseio.com',
+  projectId: 'lifetracker-d91c8',
+  storageBucket: '',
+  messagingSenderId: '1060690823590'
 }
 
 // Models
