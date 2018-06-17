@@ -1,6 +1,6 @@
 {
-  "name": "life-tracker",
-  "short_name": "life-tracker",
+  "name": "Life Tracker",
+  "short_name": "Life Tracker",
   "icons": [
     {
       "src": "/static/img/icons/android-chrome-192x192.png",
