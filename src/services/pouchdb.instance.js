@@ -64,7 +64,7 @@ class DbContext {
           }
         })
         console.log('Created remote db connection')
-        this.offline = false;
+        this.offline = false
         resolve()
       }, err => {
         console.log('Could not initialize session, error: ' + err.message)
