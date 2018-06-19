@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Set the base href for all relative paths -->
+    <script type="text/javascript">
+      document.head.innerHTML = "<base href='" + document.location.href + "' />" + document.head.innerHTML;
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +36,7 @@
       JavaScript scripts have failed to load. Make sure you have JavaScript enabled in your web browser.
     </noscript>
     <div id="app"></div>
-    <!-- Todo: only include in production -->
+    <!-- Only for production -->
     <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
     <!-- built files will be auto injected -->
   </body>
