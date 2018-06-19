@@ -20,6 +20,7 @@ class DbContext {
     this.dbName = dbName
     this.db = null
     this.remoteDb = null
+    this.offline = true
   }
 
   initSession (userId) {
@@ -63,16 +64,25 @@ class DbContext {
           }
         })
         console.log('Created remote db connection')
+        this.offline = false;
         resolve()
       }, err => {
         console.log('Could not initialize session, error: ' + err.message)
-        reject(err)
+        // reject(err)
+        // in this case we just get into offline mode
+        // in fact at this point we should see if there has been at least one connection for this user - just check a flag in localStorage or in IndexedDB
+        resolve()
       })
     })
   }
 
   sync () {
     return new Promise((resolve, reject) => {
+      if (this.offline) {
+        console.log('Skipped synching - the app is in offline mode')
+        resolve()
+        return
+      }
       console.log('Requested synching')
       PouchDB.sync(this.db, this.remoteDb, {
         live: false,

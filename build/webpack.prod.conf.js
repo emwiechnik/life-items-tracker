@@ -102,9 +102,22 @@ const webpackConfig = merge(baseWebpackConfig, {
     new SWPrecacheWebpackPlugin({
       cacheId: 'life-tracker',
       filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,html,css}'],
-      minify: true,
-      stripPrefix: 'dist/'
+      staticFileGlobs: ['dist/**/*.{js,css}'],
+      minify: false,
+      stripPrefix: 'dist/',
+      runtimeCaching: [
+        {
+            urlPattern: '/',
+            handler: 'cacheFirst'
+        },
+        { // this does not work..
+          urlPattern: '(.*)/access',
+          handler: function(request, values) {
+            console.log('Trying to go to action: access')
+            return new Response('Handled a request for ' + request.url);
+          }
+        }
+      ]
     })
   ]
 })
