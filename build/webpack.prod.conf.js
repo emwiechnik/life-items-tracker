@@ -102,7 +102,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new SWPrecacheWebpackPlugin({
       cacheId: 'life-tracker',
       filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,css}'],
+      staticFileGlobs: ['dist/**/*.{js,html,css}'],
       minify: false,
       stripPrefix: 'dist/',
       runtimeCaching: [
