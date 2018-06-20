@@ -1,5 +1,6 @@
 <template>
   <v-app id="life-tracker">
+    {{ $t('mainMenu.futureItems') }}
     <v-navigation-drawer :clipped="$vuetify.breakpoint.lgAndUp" v-model="drawer" fixed app>
       <app-menu :items="items"></app-menu>
     </v-navigation-drawer>
@@ -33,10 +34,13 @@
       return {
         drawer: null,
         items: [
-          { icon: 'settings', text: 'Upcoming' },
-          { icon: 'settings', text: 'Past' },
+          { icon: 'settings', text: this.t('mainMenu.futureItems') },
+          { icon: 'settings', text: this.t('mainMenu.pastItems') },
           { divider: true },
           { icon: 'sync', text: 'Sync', onClick: this.sync },
+          { divider: true },
+          { icon: 'settings', text: 'English', onClick: () => { this.changeLocale('en') } },
+          { icon: 'settings', text: 'Polish', onClick: () => { this.changeLocale('pl') } },
           { divider: true },
           { icon: 'help', text: 'Help' },
           { icon: 'settings', text: 'Settings' },
@@ -56,6 +60,13 @@
         this.$store.dispatch('userModule/logout').then(() => {
           this.$router.push('/login')
         })
+      },
+      changeLocale (lang) {
+        console.log('changing the language from: ' + this.$i18n.locale)
+        this.$store.dispatch('appModule/setLocale', lang)
+      },
+      t (key) {
+        return this.$t(key)
       }
     }
   }

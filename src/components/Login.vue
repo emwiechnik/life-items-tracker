@@ -6,7 +6,7 @@
         <v-layout justify-center align-center>
           <v-card>
             <v-card-title class="grey lighten-4 py-4 title">
-              Login
+              {{ $t("login.title") }}
             </v-card-title>
             <v-container grid-list-sm class="pa-4">
               <v-layout row wrap>
@@ -14,7 +14,7 @@
                   <v-text-field
                     v-model="email"
                     box
-                    label="Email address"
+                    :label="$t('login.emailAddress')"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12>
@@ -24,19 +24,19 @@
                     :type="passwordHidden ? 'password' : 'text'"
                     v-model="password"
                     box
-                    label="Password">
+                    :label="$t('login.password')">
                   </v-text-field>
                 </v-flex>
                 <v-layout justify-center align-center>
-                  <v-btn v-on:click="loginWithEmailAndPassword">Login</v-btn>
-                  <v-btn flat>Sign up</v-btn>
+                  <v-btn v-on:click="loginWithEmailAndPassword">{{ $t("login.signinBtn") }}</v-btn>
+                  <v-btn flat>{{ $t("login.signupBtn") }}</v-btn>
                 </v-layout>
               </v-layout>
             </v-container>
             <v-container grid-list-sm class="pa-4">
               <v-layout column>
-                <v-btn color="white" black v-on:click="loginWithGoogle"><img class="login-icon with-padding" alt="" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">Sign in with Google</v-btn>
-                <v-btn color="primary" white><img class="login-icon with-padding" alt="" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg">Sign in with Facebook</v-btn>
+                <v-btn color="white" black v-on:click="loginWithGoogle"><img class="login-icon with-padding" alt="" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">{{ $t("login.googleSigninBtn") }}</v-btn>
+                <v-btn color="primary" white><img class="login-icon with-padding" alt="" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg">{{ $t("login.fbSigninBtn") }}</v-btn>
               </v-layout>
             </v-container>
           </v-card>
