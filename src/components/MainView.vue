@@ -1,6 +1,5 @@
 <template>
   <v-app id="life-tracker">
-    {{ $t('mainMenu.futureItems') }}
     <v-navigation-drawer :clipped="$vuetify.breakpoint.lgAndUp" v-model="drawer" fixed app>
       <app-menu :items="items"></app-menu>
     </v-navigation-drawer>
@@ -32,34 +31,7 @@
     },
     data: function () {
       return {
-        drawer: null,
-        items: [
-          { icon: 'settings', text: this.t('mainMenu.futureItems') },
-          { icon: 'settings', text: this.t('mainMenu.pastItems') },
-          { divider: true },
-          { icon: 'sync', text: 'Sync', onClick: this.sync },
-          { divider: true },
-          { icon: 'help', text: 'Help' },
-          { icon: 'settings', text: 'Settings' },
-          { icon: 'chat_bubble', text: 'Send feedback' },
-          { icon: 'exit_to_app', text: 'Log out', onClick: this.logout }
-        ]
-      }
-    },
-    methods: {
-      sync () {
-        this.$store.dispatch('dataModule/sync').then(() => {
-          this.$store.dispatch('dataModule/loadItems')
-        })
-        this.drawer = false
-      },
-      logout () {
-        this.$store.dispatch('userModule/logout').then(() => {
-          this.$router.push('/login')
-        })
-      },
-      t (key) {
-        return this.$t(key)
+        drawer: null
       }
     }
   }

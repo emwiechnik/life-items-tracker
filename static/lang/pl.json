@@ -1,16 +1,20 @@
 {
   "login": {
     "title": "Logowanie",
-    "signinBtn": "Login",
-    "signupBtn": "Sign Up",
-    "googleSigninBtn": "Sign in with Google",
-    "fbSigninBtn": "Sign in with Facebook",
-    "emailAddress": "Email address",
-    "password": "Password"
+    "signinBtn": "Zaloguj",
+    "signupBtn": "Zarejestruj się",
+    "googleSigninBtn": "Zaloguj się poprzez Google",
+    "fbSigninBtn": "Zaloguj się poprzez Facebook",
+    "emailAddress": "Adres email",
+    "password": "Hasło"
   },
   "mainMenu": {
     "futureItems": "Nadchodzące",
     "pastItems": "Przeszłe",
-    "settings": "Ustawienia"
+    "settings": "Ustawienia",
+    "sync": "Synchronizuj",
+    "help": "Pomoc",
+    "feedback": "Wyślij uwagi",
+    "logOut": "Wyloguj"
   }
 }

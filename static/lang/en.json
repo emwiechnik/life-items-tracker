@@ -11,6 +11,10 @@
   "mainMenu": {
     "futureItems": "Upcoming",
     "pastItems": "Past",
-    "settings": "Settings"
+    "settings": "Settings",
+    "sync": "Sync",
+    "help": "Help",
+    "feedback": "Send feedback",
+    "logOut": "Log out"
   }
 }
