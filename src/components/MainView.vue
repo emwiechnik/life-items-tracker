@@ -1,7 +1,7 @@
 <template>
   <v-app id="life-tracker">
     <v-navigation-drawer :clipped="$vuetify.breakpoint.lgAndUp" v-model="drawer" fixed app>
-      <app-menu :items="items"></app-menu>
+      <app-menu></app-menu>
     </v-navigation-drawer>
     <app-toolbar v-model="drawer"></app-toolbar>
 

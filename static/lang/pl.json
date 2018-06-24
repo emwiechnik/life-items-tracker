@@ -9,8 +9,8 @@
     "password": "Hasło"
   },
   "mainMenu": {
-    "futureItems": "Nadchodzące",
-    "pastItems": "Przeszłe",
+    "futureItems": "Pokaż nadchodzące",
+    "pastItems": "Pokaż przeszłe",
     "settings": "Ustawienia",
     "sync": "Synchronizuj",
     "help": "Pomoc",
