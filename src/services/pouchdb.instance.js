@@ -57,12 +57,12 @@ class DbContext {
         this.remoteDb = new PouchDB(`${this.remoteUrl}/userdb-${hexEncodedUserName}`, {
           skipSetup: true, // todo: find out whether you really need this
           ajax: {
-            withCredentials: true,
+            withCredentials: false,
             headers: {
               'Content-Type': 'application/json; charset=utf-8',
-              'X-Auth-CouchDB-Roles': '',
-              'X-Auth-CouchDB-UserName': userId,
-              'cookie': data.cookie
+              'X-Auth-R': '', // roles
+              'X-Auth-U': userId, // user name
+              'X-Auth-T': data.token // token
             }
           }
         })
