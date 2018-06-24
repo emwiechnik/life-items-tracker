@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import ItemsList from './ItemsList3.vue'
+  import ItemsList from './ItemsList.vue'
   import AppMenu from './AppMenu.vue'
   import AppToolbar from './AppToolbar.vue'
   import AddItemButton from './AddItemButton.vue'
