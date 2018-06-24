@@ -21,12 +21,20 @@
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <v-card flat color="blue darken-3" v-if="userEmail"><v-card-title>{{ userEmail }}</v-card-title></v-card>
+      <v-menu offset-y>
+        <v-card slot="activator" flat color="blue darken-3"><v-card-title>{{ langName }} </v-card-title></v-card>
+        <v-list>
+          <v-list-tile v-for="lang in availableLanguages" :key="lang.locale" v-on:click="setLang(lang.locale)">
+            <v-list-tile-title>{{ lang.name }}</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
     </v-toolbar-items>
   </v-toolbar>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
 
   export default {
     props: [
@@ -36,7 +44,13 @@
       drawer: function () {
         return this.value
       },
-      ...mapGetters('userModule', ['userAuthenticated', 'userEmail'])
+      ...mapGetters('userModule', ['userAuthenticated', 'userEmail']),
+      ...mapGetters('appModule', ['lang', 'langName', 'availableLanguages'])
+    },
+    methods: {
+      ...mapActions({
+        setLang: 'appModule/setLocale'
+      })
     },
     mounted () {
       this.$store.dispatch('userModule/refresh')

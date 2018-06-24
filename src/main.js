@@ -7,15 +7,13 @@ import store from './stateMgmt/rootStore'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import cloudService from './services/cloud.service'
-import { i18n, loadLanguageAsync } from './services/i18n.setup'
+import { i18n } from './services/i18n.setup'
 
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
 
-loadLanguageAsync('en').then(lang => {
-  console.log(`Language ${lang} loaded`)
-})
+store.dispatch('appModule/setDefaultLocale')
 
 cloudService.init().then(() => {
   /* eslint-disable no-new */
