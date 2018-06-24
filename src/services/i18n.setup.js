@@ -5,6 +5,8 @@ import axios from 'axios'
 
 Vue.use(VueI18n)
 
+const clientSource = axios.create({})
+
 export const i18n = new VueI18n({
   locale: 'en', // set locale
   fallbackLocale: 'en',
@@ -21,16 +23,22 @@ function setI18nLanguage (lang) {
 }
 
 export function loadLanguageAsync (lang) {
-  if (i18n.locale !== lang) {
-    if (!loadedLanguages.includes(lang)) {
-      return import(/* webpackChunkName: "lang-[request]" */ `@/lang/${lang}`).then(data => {
-        let entries = data['translations'][lang]
-        i18n.setLocaleMessage(lang, entries)
-        loadedLanguages.push(lang)
-        return setI18nLanguage(lang)
-      })
+  return new Promise((resolve, reject) => {
+    if (i18n.locale !== lang) {
+      if (!loadedLanguages.includes(lang)) {
+        clientSource.get(`static/lang/${lang}.json`).then(response => {
+          let entries = response.data
+          i18n.setLocaleMessage(lang, entries)
+          loadedLanguages.push(lang)
+          resolve(setI18nLanguage(lang))
+        }, err => {
+          reject(err)
+        })
+      } else {
+        resolve(setI18nLanguage(lang))
+      }
+      return
     }
-    return Promise.resolve(setI18nLanguage(lang))
-  }
-  return Promise.resolve(lang)
+    resolve(lang)
+  })
 }

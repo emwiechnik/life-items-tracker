@@ -2,7 +2,10 @@ import PouchDB from 'pouchdb'
 import axios from 'axios'
 import securityService from './security.service'
 
-axios.defaults.baseURL = process.env.SERVER_API_URL
+const serverApi = axios.create({
+  baseURL: process.env.SERVER_API_URL
+})
+
 const dbName = 'itemsDb'
 
 function toHex (s) {
@@ -29,7 +32,7 @@ class DbContext {
     // 2. receive the cookie  to be sent in the subsequent requests to CouchDB
     console.log('Initializing session for user ' + userId)
     return new Promise((resolve, reject) => {
-      axios.post('/access', null, {
+      serverApi.post('/access', null, {
         headers: {
           'Content-Type': 'application/json',
           'Data': securityService.secureString(userId)
