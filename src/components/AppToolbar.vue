@@ -20,8 +20,7 @@
     ></v-text-field>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-card flat color="blue darken-3" v-if="userEmail"><v-card-title>{{ userEmail }}</v-card-title></v-card>
-      <v-menu offset-y>
+      <v-menu offset-y class="hidden-sm-and-down">
         <v-card slot="activator" flat color="blue darken-3"><v-card-title>{{ langName }} </v-card-title></v-card>
         <v-list>
           <v-list-tile v-for="lang in availableLanguages" :key="lang.locale" v-on:click="setLang(lang.locale)">
@@ -29,6 +28,7 @@
           </v-list-tile>
         </v-list>
       </v-menu>
+      <v-card flat color="blue darken-3" v-if="userEmail"><v-card-title>{{ userEmail }}</v-card-title></v-card>
     </v-toolbar-items>
   </v-toolbar>
 </template>

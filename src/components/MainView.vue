@@ -39,9 +39,6 @@
           { divider: true },
           { icon: 'sync', text: 'Sync', onClick: this.sync },
           { divider: true },
-          { icon: 'settings', text: 'English', onClick: () => { this.changeLocale('en') } },
-          { icon: 'settings', text: 'Polish', onClick: () => { this.changeLocale('pl') } },
-          { divider: true },
           { icon: 'help', text: 'Help' },
           { icon: 'settings', text: 'Settings' },
           { icon: 'chat_bubble', text: 'Send feedback' },
@@ -60,10 +57,6 @@
         this.$store.dispatch('userModule/logout').then(() => {
           this.$router.push('/login')
         })
-      },
-      changeLocale (lang) {
-        console.log('changing the language from: ' + this.$i18n.locale)
-        this.$store.dispatch('appModule/setLocale', lang)
       },
       t (key) {
         return this.$t(key)
