@@ -60,9 +60,9 @@ class DbContext {
             withCredentials: false,
             headers: {
               'Content-Type': 'application/json; charset=utf-8',
-              'X-Auth-R': '', // roles
-              'X-Auth-U': userId, // user name
-              'X-Auth-T': data.token // token
+              'X-AR': '', // roles
+              'X-AU': userId, // user name
+              'X-AT': data.token // token
             }
           }
         })
