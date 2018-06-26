@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import axios from 'axios'
+import moment from 'moment'
 
 Vue.use(VueI18n)
 
@@ -16,6 +17,7 @@ const loadedLanguages = []
 function setI18nLanguage (lang) {
   i18n.locale = lang
   document.querySelector('html').setAttribute('lang', lang)
+  moment.locale(lang)
   return lang
 }
 

@@ -16,5 +16,15 @@
     "help": "Pomoc",
     "feedback": "Wyślij uwagi",
     "logOut": "Wyloguj"
+  },
+  "item": {
+    "details": "Szczegóły",
+    "dateTime": "Data i czas",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "type_event": "Wydarzenie"
+  },
+  "db": {
+    "unauthorized": "Brak dostępu do bazy danych na serwerze"
   }
 }

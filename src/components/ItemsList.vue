@@ -1,19 +1,19 @@
 <template>
   <v-expansion-panel>
-    <div v-if="!authorized">Unauthorized</div>
+    <div v-if="!authorized">{{ $t('db.unauthorized') }}</div>
     <div v-if="!connected">Could not initialize fetching data from remote source</div>
     <v-expansion-panel-content v-for="(item, index) in formattedItems" :key="index" hide-actions>
       <div slot="header">
         <v-layout d-flex row>
-          <v-flex d-flex md10>
+          <v-flex d-flex xs10 md10>
             <div>
               <span>{{ item.title }}</span><br>
               <span class="grey--text">{{ item.details }}</span><br>
             </div>
           </v-flex>
-          <v-flex d-flex md2>
+          <v-flex d-flex xs2 md2>
             <div>
-              <span>{{ item.type}}</span><br>
+              <span>{{ $t('item.type_'+item.type.toLowerCase()) }}</span><br>
               <span class="green--text">{{ item.when }}</span><br>
             </div>
           </v-flex>
@@ -23,15 +23,15 @@
         <v-card>
         <v-card-title>
           <div>
-            <span>Details</span><br>
+            <span>{{ $t('item.details') }}</span><br>
             <span>{{ item.details }}</span><br>
-            <span>Date and time</span><br>
+            <span>{{ $t('item.dateTime') }}</span><br>
             <span>{{ item.date }}, {{ item.time }}</span><br>
           </div>
         </v-card-title>
         <v-card-actions>
-          <v-btn flat v-on:click="editItem(item)"><v-icon>edit</v-icon>Edit</v-btn>
-          <v-btn flat><v-icon>delete</v-icon>Delete</v-btn>
+          <v-btn flat v-on:click="editItem(item)"><v-icon>edit</v-icon>{{ $t('item.edit') }}</v-btn>
+          <v-btn flat><v-icon>delete</v-icon>{{ $t('item.delete') }}</v-btn>
         </v-card-actions>
         </v-card>
       </v-card>
@@ -50,11 +50,15 @@
       UpdateItemDialog
     },
     computed: {
-      ...mapGetters('dataModule', ['items', 'authorized', 'connected'])
+      ...mapGetters('dataModule', ['items', 'authorized', 'connected']),
+      ...mapGetters('appModule', ['lang'])
     },
     watch: {
       items: function () {
         this.formatItems()
+      },
+      lang: function () {
+        this.loadData()
       }
     },
     data: function () {

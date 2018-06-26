@@ -16,5 +16,15 @@
     "help": "Help",
     "feedback": "Send feedback",
     "logOut": "Log out"
+  },
+  "item": {
+    "details": "Details",
+    "dateTime": "Date and time",
+    "edit": "Edit",
+    "delete": "Delete",
+    "type_event": "Event"
+  },
+  "db": {
+    "unauthorized": "Unauthorized"
   }
 }
