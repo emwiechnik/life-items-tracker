@@ -2,14 +2,14 @@
   <v-dialog v-if="currentItem" v-model="value" width="800px">
       <v-card>
         <v-card-title class="grey lighten-4 py-4 title">
-          Create event or task
+          {{ $t('addOrUpdateDialog.title') }}
         </v-card-title>
         <v-container grid-list-sm class="pa-4">
           <v-layout row wrap>
             <v-flex xs12>
               <v-select
-                :items="[ 'Event', 'Task' ]"
-                label="Type"
+                :items="itemTypes"
+                :label="$t('addOrUpdateDialog.itemType')"
                 single-line
                 prepend-icon="calendar_today"
                 v-model="currentItem.type"
@@ -18,14 +18,14 @@
             <v-flex xs12>
               <v-text-field
                 prepend-icon="title"
-                placeholder="Title"
+                :placeholder="$t('addOrUpdateDialog.placeholder_title')"
                 v-model="currentItem.title"
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
               <v-text-field
                 prepend-icon="notes"
-                placeholder="Details"
+                :placeholder="$t('addOrUpdateDialog.placeholder_details')"
                 rows=2
                 multi-line
                 v-model="currentItem.details"
@@ -44,14 +44,14 @@
                   <v-text-field
                     slot="activator"
                     v-model="currentItem.date"
-                    placeholder="Date"
+                    :placeholder="$t('addOrUpdateDialog.placeholder_date')"
                     prepend-icon="event"
                     readonly
                   ></v-text-field>
                   <v-date-picker v-model="currentItem.date" scrollable>
                     <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click="datePickerModal = false">Cancel</v-btn>
-                    <v-btn flat color="primary" @click="$refs.dateDialog.save(currentItem.date)">OK</v-btn>
+                    <v-btn flat color="primary" @click="datePickerModal = false">{{ $t('button.cancel') }}</v-btn>
+                    <v-btn flat color="primary" @click="$refs.dateDialog.save(currentItem.date)">{{ $t('button.ok') }}</v-btn>
                   </v-date-picker>
                 </v-dialog>
             </v-flex>
@@ -68,14 +68,14 @@
                 <v-text-field
                   slot="activator"
                   v-model="currentItem.time"
-                  placeholder="Time"
+                  :placeholder="$t('addOrUpdateDialog.placeholder_time')"
                   prepend-icon="access_time"
                   readonly
                 ></v-text-field>
                 <v-time-picker v-model="currentItem.time" actions>
                   <v-spacer></v-spacer>
-                  <v-btn flat color="primary" @click="timePickerModal = false">Cancel</v-btn>
-                  <v-btn flat color="primary" @click="$refs.timeDialog.save(currentItem.time)">OK</v-btn>
+                  <v-btn flat color="primary" @click="timePickerModal = false">{{ $t('button.cancel') }}</v-btn>
+                  <v-btn flat color="primary" @click="$refs.timeDialog.save(currentItem.time)">{{ $t('button.ok') }}</v-btn>
                 </v-time-picker>
               </v-dialog>
             </v-flex>
@@ -83,7 +83,7 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="hide">Cancel</v-btn>
+          <v-btn flat color="primary" @click="hide">{{ $t('button.cancel') }}</v-btn>
           <v-btn flat @click="submit">{{ buttonTitle }}</v-btn>
         </v-card-actions>
       </v-card>
@@ -109,10 +109,16 @@
       },
       buttonTitle: function () {
         if (this.add) {
-          return 'Add'
+          return this.$t('addOrUpdateDialog.add')
         } else {
-          return 'Update'
+          return this.$t('addOrUpdateDialog.update')
         }
+      },
+      itemTypes: function () {
+        return [
+          { text: this.$t('item.type_event'), value: 'event' },
+          { text: this.$t('item.type_task'), value: 'task' }
+        ]
       }
     },
     data: () => {

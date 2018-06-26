@@ -13,7 +13,7 @@
           </v-flex>
           <v-flex d-flex xs2 md2>
             <div>
-              <span>{{ $t('item.type_'+item.type.toLowerCase()) }}</span><br>
+              <span>{{ $t('item.type_' + item.type) }}</span><br>
               <span class="green--text">{{ item.when }}</span><br>
             </div>
           </v-flex>

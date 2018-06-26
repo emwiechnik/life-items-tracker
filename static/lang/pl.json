@@ -22,9 +22,27 @@
     "dateTime": "Data i czas",
     "edit": "Edytuj",
     "delete": "Usuń",
-    "type_event": "Wydarzenie"
+    "type_event": "Wydarzenie",
+    "type_task": "Zadanie"
   },
   "db": {
     "unauthorized": "Brak dostępu do bazy danych na serwerze"
+  },
+  "search": {
+    "label": "Szukaj"
+  },
+  "button": {
+    "cancel": "Anuluj",
+    "ok": "OK"
+  },
+  "addOrUpdateDialog": {
+    "title": "Stwórz wydarzenie lub zadanie",
+    "itemType": "Typ",
+    "placeholder_title": "Tytuł",
+    "placeholder_details": "Szczegóły",
+    "placeholder_date": "Data",
+    "placeholder_time": "Czas",
+    "add": "Dodaj",
+    "update": "Zaktualizuj"
   }
 }

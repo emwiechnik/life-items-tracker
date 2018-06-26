@@ -4,7 +4,6 @@ import MainView from '@/components/MainView'
 import Login from '@/components/Login'
 
 import cloudService from '../services/cloud.service'
-// import { loadLanguageAsync } from '../services/i18n.setup'
 
 Vue.use(Router)
 

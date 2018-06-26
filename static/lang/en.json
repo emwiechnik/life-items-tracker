@@ -22,9 +22,27 @@
     "dateTime": "Date and time",
     "edit": "Edit",
     "delete": "Delete",
-    "type_event": "Event"
+    "type_event": "Event",
+    "type_task": "Task"
   },
   "db": {
     "unauthorized": "Unauthorized"
+  },
+  "search": {
+    "label": "Search"
+  },
+  "button": {
+    "cancel": "Cancel",
+    "ok": "OK"
+  },
+  "addOrUpdateDialog": {
+    "title": "Create event or task",
+    "itemType": "Type",
+    "placeholder_title": "Title",
+    "placeholder_details": "Details",
+    "placeholder_date": "Date",
+    "placeholder_time": "Time",
+    "add": "Add",
+    "update": "Update"
   }
 }

@@ -15,7 +15,7 @@
       flat
       solo-inverted
       prepend-icon="search"
-      label="Search"
+      :label="$t('search.label')"
       class="hidden-sm-and-down"
     ></v-text-field>
     <v-spacer></v-spacer>
