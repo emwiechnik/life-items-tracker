@@ -1,6 +1,6 @@
 export const SET_ITEMS = 'setItems'
 export const SET_AUTHORIZED = 'setAuthorized'
-export const SET_CONNECTED = 'setConnected'
+export const SET_OFFLINE = 'setOffline'
 export const ADD_ITEM = 'addItem'
 export const REFRESH_USER_DETAILS = 'refreshUserDetails'
 export const SET_LOCALE = 'setLocale'

@@ -20,6 +20,7 @@
     ></v-text-field>
     <v-spacer></v-spacer>
     <v-toolbar-items>
+      <v-icon v-if="offline">portable_wifi_off</v-icon>
       <v-menu offset-y class="hidden-sm-and-down">
         <v-card slot="activator" flat color="blue darken-3"><v-card-title>{{ langName }} </v-card-title></v-card>
         <v-list>
@@ -45,6 +46,7 @@
         return this.value
       },
       ...mapGetters('userModule', ['userAuthenticated', 'userEmail']),
+      ...mapGetters('dataModule', ['offline']),
       ...mapGetters('appModule', ['lang', 'langName', 'availableLanguages'])
     },
     methods: {

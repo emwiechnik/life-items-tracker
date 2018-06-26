@@ -1,4 +1,4 @@
-import { SET_ITEMS, SET_AUTHORIZED, SET_CONNECTED, SET_VIEW_MODE } from './mutationTypes'
+import { SET_ITEMS, SET_AUTHORIZED, SET_OFFLINE, SET_VIEW_MODE } from './mutationTypes'
 import dataService from '../services/data.service'
 
 const state = {
@@ -7,7 +7,7 @@ const state = {
   settings: {
   },
   authorized: true,
-  connected: true
+  offline: true
 }
 
 const sortItemsBy = 'dueDate'
@@ -25,13 +25,16 @@ const getters = {
   itemsViewMode: state => state.viewMode,
   settings: state => state.settings,
   authorized: state => state.authorized,
-  connected: state => state.connected
+  offline: state => state.offline
 }
 
 const actions = {
   init (context, userId) {
     return new Promise((resolve, reject) => {
-      dataService.init(userId).then(resolve, reject)
+      dataService.init(userId).then(state => {
+        context.commit(SET_OFFLINE, state.offline)
+        resolve()
+      }, reject)
     })
   },
   sync (context) {
@@ -51,7 +54,7 @@ const actions = {
           })
         }, err => {
           if (!err.response) {
-            context.commit(SET_CONNECTED, false)
+            context.commit(SET_OFFLINE, true)
           } else if (err.response.status === 401) {
             context.commit(SET_AUTHORIZED, false)
           } else {
@@ -115,8 +118,8 @@ const mutations = {
   [SET_AUTHORIZED] (state, value) {
     state.authorized = value
   },
-  [SET_CONNECTED] (state, value) {
-    state.connected = value
+  [SET_OFFLINE] (state, value) {
+    state.offline = value
   },
   [SET_VIEW_MODE] (state, value) {
     state.viewMode = value
