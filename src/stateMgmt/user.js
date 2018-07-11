@@ -48,6 +48,11 @@ const actions = {
     return new Promise((resolve, reject) => {
       cloudService.signOut().then(resolve, reject)
     })
+  },
+  signUp (context, { email, password }) {
+    return new Promise((resolve, reject) => {
+      cloudService.signUp(email, password).then(resolve, reject)
+    })
   }
 }
 

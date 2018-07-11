@@ -51,6 +51,12 @@ const dataService = {
       })
       resolve()
     })
+  },
+  free () {
+    return new Promise((resolve) => {
+      dbContext.db = null
+      resolve()
+    })
   }
 }
 

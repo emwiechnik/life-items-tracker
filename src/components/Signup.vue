@@ -6,7 +6,7 @@
         <v-layout justify-center align-center>
           <v-card>
             <v-card-title class="grey lighten-4 py-4 title">
-              {{ $t("login.title") }}
+              {{ $t("signup.title") }}
             </v-card-title>
             <v-container grid-list-sm class="pa-4">
               <v-layout row wrap>
@@ -14,7 +14,7 @@
                   <v-text-field
                     v-model="email"
                     box
-                    :label="$t('login.emailAddress')"
+                    :label="$t('signup.emailAddress')"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12>
@@ -24,19 +24,12 @@
                     :type="passwordHidden ? 'password' : 'text'"
                     v-model="password"
                     box
-                    :label="$t('login.password')">
+                    :label="$t('signup.password')">
                   </v-text-field>
                 </v-flex>
                 <v-layout justify-center align-center>
-                  <v-btn v-on:click="loginWithEmailAndPassword">{{ $t("login.signinBtn") }}</v-btn>
-                  <v-btn v-on:click="goToSignup" flat>{{ $t("login.signupBtn") }}</v-btn>
+                  <v-btn v-on:click="signUp">{{ $t("signup.signupBtn") }}</v-btn>
                 </v-layout>
-              </v-layout>
-            </v-container>
-            <v-container grid-list-sm class="pa-4">
-              <v-layout column>
-                <v-btn color="white" black v-on:click="loginWithGoogle"><img class="login-icon with-padding" alt="" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">{{ $t("login.googleSigninBtn") }}</v-btn>
-                <v-btn color="primary" white><img class="login-icon with-padding" alt="" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg">{{ $t("login.fbSigninBtn") }}</v-btn>
               </v-layout>
             </v-container>
           </v-card>
@@ -68,23 +61,15 @@
     data: () => ({
       email: '',
       password: '',
-      passwordHidden: true
+      repeatedPassword: ''
     }),
     methods: {
-      loginWithEmailAndPassword () {
-        this.$store.dispatch('userModule/loginWithEmailAndPassword', { email: this.email, password: this.password }).then(() => {
+      signUp () {
+        this.$store.dispatch('userModule/signUp', { email: this.email, password: this.password }).then(() => {
           this.$router.replace('/')
         }, err => {
           alert(err)
         })
-      },
-      loginWithGoogle () {
-        this.$store.dispatch('userModule/loginWithGoogle').then(() => {
-          this.$router.replace('/')
-        })
-      },
-      goToSignup () {
-        this.$router.replace('/signup')
       }
     }
   }

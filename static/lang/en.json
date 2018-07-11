@@ -8,6 +8,12 @@
     "emailAddress": "Email address",
     "password": "Password"
   },
+  "signup": {
+    "title": "Signup",
+    "signupBtn": "Sign me up!",
+    "emailAddress": "Email address",
+    "password": "Password"
+  },
   "mainMenu": {
     "futureItems": "Show upcoming",
     "pastItems": "Show past",

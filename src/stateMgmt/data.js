@@ -94,6 +94,15 @@ const actions = {
     }
     context.commit(SET_VIEW_MODE, { past: true })
     context.dispatch('loadItems')
+  },
+  free (context) {
+    return new Promise((resolve, reject) => {
+      dataService.free().then(() => {
+        context.commit(SET_ITEMS, [])
+        context.commit(SET_OFFLINE, true)
+        resolve()
+      }, reject)
+    })
   }
 }
 

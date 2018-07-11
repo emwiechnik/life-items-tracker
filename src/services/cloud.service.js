@@ -76,6 +76,15 @@ const cloudService = {
       })
     })
   },
+  signUp (email, password) {
+    return new Promise((resolve, reject) => {
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        resolve()
+      }, err => {
+        reject(err)
+      })
+    })
+  },
   getCurrentUser () {
     let user = firebase.auth().currentUser
 
