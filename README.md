@@ -1,21 +1,23 @@
-# life-tracker
+# Life Items Tracker
+An app implemented as a _proof-of-concept_ where I wanted to try out Vuetify library, Firebase auth and CouchDB on the server side to see how they can be used together.
 
-> to the point
+Uses:
+- Vuetify
+- CouchDB on the server-side
+- PouchDB on the client-side
+- Firebase authentication
 
-## Build Setup
+----
+[Live demo](https://lifetracker-d91c8.firebaseapp.com)
+----
 
-``` bash
-# install dependencies
-npm install
+### Steps to run the app locally
+1. Clone
+2. Update the file cloud-service.js with your own config generated in Firebase console
+3. In command line:
 
-# serve with hot reload at localhost:8080
-npm run dev
+    npm install
+    
+    npm run dev
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+**Note:** even if the back-end is unavailable, the app will work and store all the data within the browser's IndexedDB through PouchDB api.
